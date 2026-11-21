@@ -39,13 +39,17 @@
 
 ## 界面预览
 
-> 📸 截图占位区域——建议补充以下截图：
-> - Dashboard 总览页
-> - 趋势图表页
-> - TOP 100 排行页
-> - 12 周日历热力图
-> - 播放历史列表
-> - 数据管理面板（导入/导出/合并）
+### 扩展安装界面
+![扩展安装界面](assets/screenshots/extension-install.png)
+
+### 扩展功能列表
+![扩展功能](assets/screenshots/extension-features.png)
+
+### 图形化统计面板 - 概览与趋势
+![图形化界面展示01](assets/screenshots/dashboard-01.png)
+
+### 图形化统计面板 - 排行榜与日历
+![图形化界面展示02](assets/screenshots/dashboard-02.png)
 
 ## 当前稳定版本
 
@@ -53,7 +57,8 @@
 |------|-----|
 | **稳定基线版本** | **v10** (AnyListen-beta5-MusicStats-Dashboard-Fix-v10) |
 | **适配宿主版本** | Any Listen Desktop 0.10.1-beta.5 |
-| **插件版本** | 1.2.0 |
+| **插件版本** | 1.2.4 |
+| **扩展包文件** | `anylisten_music_stats_v1.2.4.alix` |
 | **发布日期** | 2026-11-21 |
 | **验证状态** | ✅ 用户实机测试通过，所有功能正常 |
 
@@ -75,7 +80,7 @@
 - 已安装 Node.js（用于构建插件包）
 
 ### 方式一：使用预构建的扩展包（推荐）
-1. 从 [Releases](https://github.com/mocho2001/anylisten-music-stats-public/releases) 下载最新的 `.alix` 扩展包
+1. 从 [Releases](https://github.com/mocho2001/anylisten-music-stats-public/releases) 下载最新的 `.alix` 扩展包（当前版本：`anylisten_music_stats_v1.2.4.alix`）
 2. 打开 Any Listen，进入 **设置 → 扩展**
 3. 点击 **从本地安装**，选择下载的 `.alix` 文件
 4. 安装完成后，在扩展列表中启用 **Music Stats**
@@ -205,7 +210,7 @@ A: 不建议。不同扩展可能共用同一宿主组件，导致数据冲突�
 ```
 AnyListen-Music-Stats-Public/
 ├─ README.md                 # 本文件
-├─ LICENSE                   # 许可证（待确定）
+├─ LICENSE                   # MIT 许可证
 ├─ CHANGELOG.md              # 版本变更日志
 ├─ CONTRIBUTING.md           # 贡献指南
 ├─ SECURITY.md               # 安全报告
@@ -233,7 +238,7 @@ AnyListen-Music-Stats-Public/
 │      └─ patch_host.py      # 补丁应用脚本
 │
 ├─ assets/
-│  ├─ screenshots/           # 界面截图
+│  ├─ screenshots/           # 界面截图（已包含 4 张预览图）
 │  └─ images/                # 文档用图片
 │
 ├─ releases/
@@ -241,7 +246,7 @@ AnyListen-Music-Stats-Public/
 │
 └─ .github/
    ├─ ISSUE_TEMPLATE/        # Issue 模板
-   └─ workflows/             # GitHub Actions（待补充）
+   └─ workflows/             # GitHub Actions
 ```
 
 ## 参与开发与问题反馈
