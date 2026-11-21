@@ -111,7 +111,7 @@
 3. 点击 **从本地安装**，选择下载的 `anylisten_music_stats_v1.2.4.alix` 文件
 4. 安装完成后，在设置 → 扩展设置中找到 **AnyListen-Music-Stats** 即可看到图形化统计界面
 
-### 步骤三：从源码构建（开发者/高级用户）
+### 方法二：从源码构建（开发者/高级用户）
 ```powershell
 # 1. 克隆仓库
 git clone https://github.com/mocho2001/anylisten-music-stats-public.git
