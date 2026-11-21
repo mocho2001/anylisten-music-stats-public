@@ -13,25 +13,23 @@
 
 ## 安装方式
 
-### 方式一：预构建扩展包安装（推荐，最简单）
+### 步骤一：安装插件包 (推荐普通用户)
 
 #### 1. 下载扩展包
 - 访问 [GitHub Releases](https://github.com/mocho2001/anylisten-music-stats-public/releases)
-- 下载最新版本的 `AnyListen-Music-Stats-v10.alix`（或对应版本文件名）
+- 下载最新版本的 `anylisten_music_stats_v1.2.4.alix`
 
 #### 2. 安装到 Any Listen
 1. 打开 Any Listen 桌面客户端
 2. 点击左下角 **设置** (齿轮图标)
 3. 在左侧菜单选择 **扩展**
 4. 点击右上角 **从本地安装** 按钮
-5. 在文件选择对话框中，选择下载的 `.alix` 文件
+5. 在文件选择对话框中，选择下载的 `anylisten_music_stats_v1.2.4.alix` 文件
 6. 等待安装完成提示
 
-#### 3. 启用扩展
-1. 在扩展列表中找到 **Music Stats**
-2. 点击 **启用** 开关（如未自动启用）
-3. 点击扩展卡片的 **打开面板** 或 **设置**
-4. 或在设置左侧菜单直接点击 **听歌统计** 入口
+#### 3. 启用扩展与查看面板
+1. 安装完成后，在设置 → 扩展设置中找到 **AnyListen-Music-Stats** 即可看到图形化统计界面
+2. 无需替换宿主文件，风险更低，卸载更方便
 
 #### 4. 验证安装
 - 面板正常打开，显示“听歌统计”标题
@@ -40,7 +38,22 @@
 
 ---
 
-### 方式二：从源码构建安装（开发者/高级用户）
+### 步骤二：使用预构建稳定基线 app.asar (替换宿主文件，仅限高级用户)
+
+> ⚠️ **高风险操作，请务必按步骤操作并先备份！**
+
+1. **完全退出 Any Listen**，并在任务管理器确认进程已结束。
+2. **备份** 安装目录下的 `resources/app.asar`（例如重命名为 `app.asar.before-v10.bak`）。
+   - 默认路径：`C:\Program Files\Any Listen\resources\app.asar`
+3. 从 Release 下载 `AnyListen-beta5-MusicStats-Dashboard-Fix-v10.app.asar`，**重命名为 `app.asar`** 后替换安装目录下的 `resources/app.asar`。
+4. **保留用户数据目录**，不要删除统计数据库（`music-stats/data-v2.json`）。
+5. 重启 Any Listen，在设置中进入"听歌统计"面板查看图形化统计界面。
+6. 如果仍无法启动，**立即退出并恢复备份**的原版 `app.asar`。
+7. **本文件需要使用对应版本的软件**：Any Listen 0.10.1-beta.5。
+
+---
+
+### 步骤三：从源码构建安装（开发者/高级用户）
 
 #### 1. 准备环境
 ```powershell

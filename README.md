@@ -79,14 +79,27 @@
 - Any Listen Desktop 0.10.1-beta.5（当前稳定基线对应版本）
 - 已安装 Node.js（用于构建插件包）
 
-### 方式一：使用预构建的扩展包（推荐）
-1. 从 [Releases](https://github.com/mocho2001/anylisten-music-stats-public/releases) 下载最新的 `.alix` 扩展包（当前版本：`anylisten_music_stats_v1.2.4.alix`）
+### 步骤一：安装插件包 (推荐普通用户)
+1. 从 [Releases](https://github.com/mocho2001/anylisten-music-stats-public/releases) 下载 `anylisten_music_stats_v1.2.4.alix`
 2. 打开 Any Listen，进入 **设置 → 扩展**
-3. 点击 **从本地安装**，选择下载的 `.alix` 文件
-4. 安装完成后，在扩展列表中启用 **Music Stats**
-5. 点击扩展卡片的 **打开面板** 或在设置侧边栏找到 **听歌统计** 入口
+3. 点击 **从本地安装**，选择下载的 `anylisten_music_stats_v1.2.4.alix` 文件
+4. 安装完成后，在设置 → 扩展设置中找到 **AnyListen-Music-Stats** 即可看到图形化统计界面
+5. 无需替换宿主文件，风险更低，卸载更方便
 
-### 方式二：从源码构建
+### 步骤二：使用预构建稳定基线 app.asar (替换宿主文件，仅限高级用户)
+
+> ⚠️ **高风险操作，请务必按步骤操作并先备份！**
+
+1. **完全退出 Any Listen**，并在任务管理器确认进程已结束。
+2. **备份** 安装目录下的 `resources/app.asar`（例如重命名为 `app.asar.before-v10.bak`）。
+   - 默认路径：`C:\Program Files\Any Listen\resources\app.asar`
+3. 从 Release 下载 `AnyListen-beta5-MusicStats-Dashboard-Fix-v10.app.asar`，**重命名为 `app.asar`** 后替换安装目录下的 `resources/app.asar`。
+4. **保留用户数据目录**，不要删除统计数据库（`music-stats/data-v2.json`）。
+5. 重启 Any Listen，在设置中进入"听歌统计"面板查看图形化统计界面。
+6. 如果仍无法启动，**立即退出并恢复备份**的原版 `app.asar`。
+7. **本文件需要使用对应版本的软件**：Any Listen 0.10.1-beta.5。
+
+### 步骤三：从源码构建（开发者/高级用户）
 ```powershell
 # 1. 克隆仓库
 git clone https://github.com/mocho2001/anylisten-music-stats-public.git
@@ -101,7 +114,7 @@ copy .env.example .env
 # 产物在 plugin/dist/ 或 plugin/build/ 目录下
 ```
 
-> ⚠️ **注意**：构建产生的 `.alix` 包含签名，必须使用与 Any Listen 扩展系统匹配的密钥对。如果没有密钥，请使用方式一的预构建包。
+> ⚠️ **注意**：构建产生的 `.alix` 包含签名，必须使用与 Any Listen 扩展系统匹配的密钥对。如果没有密钥，请使用步骤一的预构建包。
 
 ## 使用教程
 
