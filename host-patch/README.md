@@ -220,7 +220,7 @@ python patch_host.py --help
 - [版本工作流规范](../docs/development/VERSION_WORKFLOW.md)
 - [安装指南](../docs/INSTALLATION.md)
 - [插件源码说明](../plugin/README.md)
-- [v10 基线审计报告](../docs/audits/AnyListen-beta5-v10-audit.md)
+- [v10 基线功能文档](../docs/FEATURES.md)
 
 ---
 
