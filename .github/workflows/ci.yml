@@ -1,0 +1,109 @@
+name: CI - Build & Syntax Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-check:
+    name: TypeScript Compile & Syntax Check
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: plugin/pnpm-lock.yaml
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        working-directory: ./plugin
+        run: pnpm install --frozen-lockfile
+
+      - name: TypeScript type check
+        working-directory: ./plugin
+        run: npx tsc --noEmit
+
+      - name: JavaScript syntax check (compiled output)
+        working-directory: ./plugin
+        run: |
+          # 编译后做基本语法检查
+          npx tsc
+          # 简单的语法合法性检查
+          Get-ChildItem dist -Recurse -Filter *.js | ForEach-Object {
+            try { node -c $_; Write-Host "✅ $_" } catch { Write-Error "❌ $_: $($_.Exception.Message)" }
+          }
+
+      - name: Verify manifest.json exists
+        run: |
+          if (Test-Path "plugin/dist/manifest.json") {
+            Write-Host "✅ manifest.json exists"
+          } else {
+            Write-Warning "⚠️ manifest.json not found in dist (build may not have run)"
+          }
+
+      - name: Check for sensitive patterns (basic scan)
+        run: |
+          # 简单的敏感信息扫描
+          $patterns = @(
+            'private.?key', 'secret', 'password', 'token', 'apikey',
+            'BEGIN (RSA|EC|PRIVATE) KEY', 'PRIVATE KEY-----'
+          )
+          $found = $false
+          Get-ChildItem -Recurse -File -Exclude "*.alix", "*.zip", "node_modules/*", "dist/*", "build/*", ".git/*" | ForEach-Object {
+            $content = Get-Content $_ -Raw -ErrorAction SilentlyContinue
+            foreach ($p in $patterns) {
+              if ($content -match $p) {
+                Write-Warning "⚠️ Potential sensitive pattern '$p' in $_"
+                $found = $true
+              }
+            }
+          }
+          if (-not $found) { Write-Host "✅ No obvious sensitive patterns detected" }
+
+      - name: Verify .alix package structure (if exists)
+        run: |
+          $alixFiles = Get-ChildItem -Recurse -Filter *.alix -ErrorAction SilentlyContinue
+          if ($alixFiles) {
+            foreach ($f in $alixFiles) {
+              Write-Host "Found package: $($f.FullName) ($([math]::Round($f.Length/1KB,1)) KB)"
+              # 简单校验：是否为 ZIP 格式
+              try {
+                $zip = [System.IO.Compression.ZipFile]::OpenRead($f.FullName)
+                $entries = $zip.Entries.Count
+                $zip.Dispose()
+                Write-Host "  ✅ Valid ZIP structure, $entries entries"
+              } catch {
+                Write-Error "  ❌ Invalid .alix package: $($_.Exception.Message)"
+              }
+            }
+          } else {
+            Write-Host "ℹ️ No .alix packages in repo (expected for source repo)"
+          }
+
+  # 文档链接检查（可选）
+  # docs-link-check:
+  #   name: Check Documentation Links
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Check markdown links
+  #       uses: gaurav-nelson/github-action-markdown-link-check@v1
+  #       with:
+  #         use-quiet-mode: 'yes'
+  #         config-file: '.markdown-link-check.json'

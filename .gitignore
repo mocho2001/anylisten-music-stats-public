@@ -1,0 +1,120 @@
+# ================================
+# Any Listen Music Stats - Public Repository .gitignore
+# ================================
+
+# --- 依赖与构建产物 ---
+node_modules/
+dist/
+build/
+*.alix
+*.zip
+*.tgz
+
+# --- 签名与密钥（绝不提交） ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.der
+*.crt
+*.p12
+*.pfx
+*.sig
+signature.bin
+public-key.der
+SIGNATURE-INFO.txt
+test-keys/
+temp_key.*
+
+# --- 本地数据与用户数据（绝不提交） ---
+music-stats/
+data-v*.json
+*.db
+*.sqlite
+*.log
+*.cache
+backups/
+pre-import-*.json
+*.export.json
+*.export.csv
+anylisten-music-*.json
+anylisten-music-*.csv
+anylisten-music-*.html
+
+# --- 宿主程序文件（不分发官方文件） ---
+app.asar
+app.asar.*
+*.asar
+host-versions/
+original/
+patched/
+working*/
+temp_asar/
+
+# --- IDE 与编辑器 ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- 操作系统临时文件 ---
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# --- 测试与覆盖率 ---
+coverage/
+.nyc_output/
+*.lcov
+
+# --- Python 缓存 ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- 日志与诊断 ---
+logs/
+*.log
+diagnostic-*.txt
+windows-acceptance.md
+
+# --- 发布产物（仅通过 GitHub Releases 分发） ---
+releases/*.alix
+releases/*.zip
+releases/*.exe
+releases/*.msi
+
+# --- 私有仓库专用文件（公开仓库不需要） ---
+AGENTS.md
+docs/APP_ASAR_UPGRADE_WORKFLOW.md
+docs/ANYLISTEN_GITHUB_PRIVATE_WORKFLOW.md
+docs/HARNESS_*.md
+docs/MIGRATION_STATUS.md
+docs/TEST_REPORT_*.md
+docs/FINAL_AUDIT_*.md
+docs/SIGNATURE_AUDIT_*.md
+reference/
+scripts/
+backups/
+migration-extracted/
+.dsh/
+*.alix
+
+# --- 敏感信息模式 ---
+*secret*
+*token*
+*password*
+*credential*
+*private*
+*apikey*
+*api_key*
+*access_token*
